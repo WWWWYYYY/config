@@ -13,7 +13,7 @@ eureka:
     service-url:
       #defaultZone: http://localhost:7001/eureka #表示注册到某个服务注册中心，但是生产环境一般要把所有的注册中心都列出来，避免只写一个，万一那一台服务器不能使用则无法注册服务
 #      defaultZone: http://admin:enjoy@localhost:7001/eureka #表示安全访问到服务注册中心 (http://注册中心提供的用户名:密码@ip:port/eureka)
-      defaultZone: http://admin:enjoy@eureka1:7001/eureka,http://admin:enjoy@eureka2:7002/eureka,http://admin:enjoy@eureka3:7003/eureka
+      defaultZone: http://admin:enjoy@eureka1:7001/eureka
 #设置服务实例名称、设置服务和eureka注册中心心跳通信的间隔时间、设置多长时间没有收到注册中心报文抛异常
   instance:
     instance-id: eureka-product1
