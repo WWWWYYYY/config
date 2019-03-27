@@ -1,0 +1,39 @@
+server:
+ port: 8099 # http://localhost:8099/actuator/hystrix.stream 检查
+
+#将服务注册到eureka中一定要写服务名，不然没法区分eureka服务列表哪个是哪个
+spring:
+  profiles: dev
+  application:
+    name: eureka-product1
+# 客户端配置 Eureka注册信息
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      #defaultZone: http://localhost:7001/eureka #表示注册到某个服务注册中心，但是生产环境一般要把所有的注册中心都列出来，避免只写一个，万一那一台服务器不能使用则无法注册服务
+#      defaultZone: http://admin:enjoy@localhost:7001/eureka #表示安全访问到服务注册中心 (http://注册中心提供的用户名:密码@ip:port/eureka)
+      defaultZone: http://admin:enjoy@eureka1:7001/eureka,http://admin:enjoy@eureka2:7002/eureka,http://admin:enjoy@eureka3:7003/eureka
+#设置服务实例名称、设置服务和eureka注册中心心跳通信的间隔时间、设置多长时间没有收到注册中心报文抛异常
+  instance:
+    instance-id: eureka-product1
+    prefer-ip-address: true #显示IP地址而不是域名
+    lease-renewal-interval-in-seconds: 2 # 向服务器发送心跳报文，设置心跳的时间间隔（默认是30秒）
+    lease-expiration-duration-in-seconds: 5  # 如果现在超过了5秒的间隔（默认是90秒）；发现和服务在N秒时间内没有心跳或者数据交互表示和服务器失联
+#配置注册信息
+info:
+  app.name: eureka-product1
+  company.name: enjoy
+  build.artifactId: $project.artifactId$
+  build.modelVersion: ${project.modelVersion}
+  version: $version$
+#  jdk-version: @java.version@
+#  spring-boot.version: @spring-boot.version@
+#  spring-cloud.version: @spring-cloud.version@
+#  author: 小姐姐
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
